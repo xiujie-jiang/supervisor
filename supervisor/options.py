@@ -1707,7 +1707,8 @@ class UnhosedConfigParser(ConfigParser.RawConfigParser):
                 raise
             else:
                 optval = default
-
+        if isinstance(optval, unicode): 
+            optval = str(optval)  #  在使用configparser模块，对读取配置文件内容类型为 unicode的情况做处理
         if do_expand and isinstance(optval, basestring):
             combined_expansions = dict(
                 list(self.expansions.items()) + list(expansions.items()))
